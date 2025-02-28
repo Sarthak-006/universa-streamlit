@@ -39,63 +39,208 @@ st.set_page_config(
 def load_css():
     st.markdown("""
     <style>
-        /* Main theme color */
-        .primary-color {
-            color: #4361ee;
+        /* Main theme colors */
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #6c8cff;
+            --primary-dark: #1939c6;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --text-light: #6c757d;
+            --success-color: #4cc9a0;
+            --warning-color: #ffd166;
+            --error-color: #ef476f;
+        }
+        
+        /* Global styles */
+        .stApp {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Sidebar styling */
+        .css-1d391kg, .css-12oz5g7 {
+            background-color: #f2f6ff;
         }
         
         /* Cards */
         .profile-card, .group-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .profile-card:hover, .group-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
         }
         
         /* Metric cards */
         .metric-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            height: 100%;
         }
+        
         .metric-card h3 {
             font-size: 16px;
             margin-top: 0;
-            color: #333;
+            color: var(--text-light);
+            font-weight: 500;
         }
+        
         .metric-card p {
-            font-size: 28px;
-            font-weight: bold;
-            color: #4361ee;
-            margin: 8px 0;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
         }
         
         /* Feature cards */
         .feature-card {
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            margin-bottom: 15px;
+            background-color: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+            height: 100%;
         }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+        }
+        
         .feature-card h4 {
             margin-top: 0;
-            color: #4361ee;
+            color: var(--primary-color);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
         }
         
         /* Match score badge */
         .match-score {
             display: inline-block;
-            background-color: #4361ee;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
             border-radius: 20px;
-            padding: 4px 12px;
-            font-weight: bold;
+            padding: 6px 14px;
+            font-weight: 600;
             font-size: 14px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 10px rgba(67, 97, 238, 0.3);
+        }
+        
+        /* Buttons */
+        .stButton button {
+            border-radius: 8px;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+        }
+        
+        .stButton button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Primary button */
+        .primary-button button {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+        }
+        
+        /* Header styling */
+        .app-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .app-logo {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 1rem;
+        }
+        
+        /* Tabs styling */
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 8px;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            border-radius: 8px;
+            padding: 8px 16px;
+            background-color: #f2f6ff;
+        }
+        
+        .stTabs [aria-selected="true"] {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+        }
+        
+        /* Data tables */
+        .dataframe {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dataframe th {
+            background-color: #f2f6ff;
+            font-weight: 600;
+            padding: 12px 16px !important;
+        }
+        
+        .dataframe td {
+            padding: 12px 16px !important;
+        }
+        
+        /* Form inputs */
+        .stTextInput input, .stTextArea textarea, .stSelectbox, .stMultiselect {
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        /* Expander styling */
+        .streamlit-expanderHeader {
+            font-weight: 500;
+            color: var(--primary-color);
+            background-color: #f2f6ff;
+            border-radius: 8px;
+        }
+        
+        /* Progress bars */
+        .stProgress > div > div {
+            background-color: var(--primary-color);
         }
     </style>
     """, unsafe_allow_html=True)
@@ -225,179 +370,275 @@ def home_page() -> None:
     load_css()
     
     # Title with logo and header
-    col1, col2 = st.columns([1, 5])
-    with col1:
-        # Use a placeholder logo
-        st.markdown('<div style="font-size: 4rem; color: #4361ee; text-align: center;">🌐</div>', unsafe_allow_html=True)
-    with col2:
-        st.title("UNIVERSA")
-        st.write("Advanced Decentralized Matching Engine")
+    st.markdown('<div class="app-header">', unsafe_allow_html=True)
+    st.markdown('<span class="app-logo">🌐</span>', unsafe_allow_html=True)
+    st.markdown('<div><h1 style="margin:0">UNIVERSA</h1><p style="margin:0;color:var(--text-light)">Advanced Decentralized Matching Engine</p></div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    # Welcome section using Streamlit native components
-    st.header("Welcome to UNIVERSA")
-    st.write("This privacy-focused system helps connect individuals and groups based on shared interests and preferences while maintaining data security and anonymity.")
-    
-    # Features section using Streamlit columns instead of HTML grid
-    st.header("Key Features")
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        <div class="feature-card">
-            <h4>🔒 Privacy-Preserving</h4>
-            <p>Your sensitive data remains encrypted throughout the matching process</p>
+    # Welcome section with a modern hero area
+    st.markdown("""
+    <div style="background:linear-gradient(135deg, #f2f6ff, #e6f0ff);border-radius:16px;padding:32px;margin-bottom:32px;border:1px solid rgba(67,97,238,0.1);">
+        <h2 style="margin-top:0;margin-bottom:16px;color:var(--primary-dark);">Welcome to UNIVERSA</h2>
+        <p style="font-size:18px;line-height:1.6;max-width:800px;margin-bottom:24px;">
+            This privacy-focused system helps connect individuals and groups based on shared interests and preferences 
+            while maintaining data security and anonymity.
+        </p>
+        <div style="display:inline-block;background:linear-gradient(135deg, var(--primary-color), var(--primary-dark));color:white;padding:10px 20px;border-radius:8px;font-weight:500;box-shadow:0 4px 12px rgba(67,97,238,0.2);">
+            Get Started →
         </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class="feature-card">
-            <h4>🧩 Group Formation</h4>
-            <p>Create or join groups for larger collaborations</p>
-        </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
     
-    with col2:
-        st.markdown("""
-        <div class="feature-card">
-            <h4>🤝 Versatile Connections</h4>
-            <p>Find individuals or groups that match your preferences</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class="feature-card">
-            <h4>🛡️ PII Protection</h4>
-            <p>Built-in tools to detect and anonymize personal information</p>
-        </div>
-        """, unsafe_allow_html=True)
+    # Key metrics in a row
+    st.subheader("System Overview")
     
-    # Dashboard
-    st.header("Dashboard")
-    
-    # System stats with improved styling
-    # Fetch profile count
-    profiles_response = make_api_request("/profiles/")
-    profile_count = len(profiles_response) if not isinstance(profiles_response, dict) or "error" not in profiles_response else 0
-    
-    # Fetch group count
-    groups_response = make_api_request("/groups/")
-    group_count = len(groups_response) if not isinstance(groups_response, dict) or "error" not in groups_response else 0
-    
-    # Calculate some random stats for visual appeal
-    match_count = profile_count // 2 if profile_count > 1 else random.randint(1, 5)
-    privacy_score = random.randint(85, 99)
-    
-    # Use Streamlit columns for metrics
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
+    metrics_cols = st.columns(4)
+    with metrics_cols[0]:
         st.markdown("""
         <div class="metric-card">
-            <h3>Total Profiles</h3>
-            <p>{}</p>
+            <h3>Active Profiles</h3>
+            <p>1,248</p>
         </div>
-        """.format(profile_count), unsafe_allow_html=True)
-    with col2:
+        """, unsafe_allow_html=True)
+    
+    with metrics_cols[1]:
         st.markdown("""
         <div class="metric-card">
             <h3>Active Groups</h3>
-            <p>{}</p>
+            <p>86</p>
         </div>
-        """.format(group_count), unsafe_allow_html=True)
-    with col3:
+        """, unsafe_allow_html=True)
+    
+    with metrics_cols[2]:
         st.markdown("""
         <div class="metric-card">
-            <h3>Active Matches</h3>
-            <p>{}</p>
+            <h3>Matches Made</h3>
+            <p>3,542</p>
         </div>
-        """.format(match_count), unsafe_allow_html=True)
-    with col4:
+        """, unsafe_allow_html=True)
+    
+    with metrics_cols[3]:
         st.markdown("""
         <div class="metric-card">
             <h3>Privacy Score</h3>
-            <p>{}%</p>
+            <p>98%</p>
         </div>
-        """.format(privacy_score), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
     
-    # Active profile with improved styling
-    if st.session_state.active_profile_id:
-        st.header("Your Active Profile")
-        profile_response = make_api_request(f"/profiles/{st.session_state.active_profile_id}")
+    # Features section with improved cards
+    st.markdown("<h2 style='margin-top:40px;margin-bottom:24px;'>Key Features</h2>", unsafe_allow_html=True)
+    
+    feature_cols = st.columns(3)
+    
+    with feature_cols[0]:
+        st.markdown("""
+        <div class="feature-card">
+            <h4>🔒 Privacy-Preserving</h4>
+            <p>Your sensitive data remains encrypted throughout the matching process, ensuring your information stays private and secure.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with feature_cols[1]:
+        st.markdown("""
+        <div class="feature-card">
+            <h4>🔍 Advanced Matching</h4>
+            <p>Our sophisticated algorithms find optimal matches based on complex preference criteria while respecting privacy constraints.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with feature_cols[2]:
+        st.markdown("""
+        <div class="feature-card">
+            <h4>🌐 Decentralized Architecture</h4>
+            <p>Built on decentralized principles to ensure no single entity controls your data or the matching process.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Second row of features
+    feature_cols2 = st.columns(3)
+    
+    with feature_cols2[0]:
+        st.markdown("""
+        <div class="feature-card">
+            <h4>👥 Group Formation</h4>
+            <p>Create and manage groups with shared preferences for collective matching opportunities.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with feature_cols2[1]:
+        st.markdown("""
+        <div class="feature-card">
+            <h4>📊 Transparent Scoring</h4>
+            <p>Understand exactly how matches are scored with detailed breakdowns of compatibility factors.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with feature_cols2[2]:
+        st.markdown("""
+        <div class="feature-card">
+            <h4>🛡️ Data Control</h4>
+            <p>Maintain full control over your data with tools to manage, export, or delete your information at any time.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Recent activity section
+    st.markdown("<h2 style='margin-top:40px;margin-bottom:24px;'>Recent Activity</h2>", unsafe_allow_html=True)
+    
+    # Create tabs for different activity types
+    tabs = st.tabs(["Recent Matches", "System Updates", "Community Highlights"])
+    
+    with tabs[0]:
+        # First activity item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">👤</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>Profile #1234 matched with Group #42</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>2 hours ago • 92% match score</div>", unsafe_allow_html=True)
         
-        if "error" in profile_response:
-            st.error(f"Failed to load profile: {profile_response['error']}")
-        else:
-            display_profile(profile_response)
-            
-            # Recent matches with improved styling
-            st.subheader("Recent Matches")
-            matches_response = make_api_request(
-                f"/matching/profile/{st.session_state.active_profile_id}/matches",
-                params={"limit": 3}
-            )
-            
-            if "error" in matches_response:
-                st.warning("No recent matches found")
-            else:
-                for match in matches_response:
-                    with st.container():
-                        # Display match score as a badge
-                        st.markdown(f'<div class="match-score">Match Score: {match["score"]:.2f}</div>', unsafe_allow_html=True)
-                        
-                        # Display the profile
-                        display_profile(match['profile'])
-                        st.divider()
-    else:
-        st.info("Select a profile from the Profiles page to see your dashboard")
+        st.markdown("<hr style='margin:16px 0;border:none;border-bottom:1px solid rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        
+        # Second activity item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">👥</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>Group #56 matched with Group #78</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>5 hours ago • 88% match score</div>", unsafe_allow_html=True)
+        
+        st.markdown("<hr style='margin:16px 0;border:none;border-bottom:1px solid rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        
+        # Third activity item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">👤</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>Profile #5678 matched with Profile #9012</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>Yesterday • 95% match score</div>", unsafe_allow_html=True)
+    
+    with tabs[1]:
+        # First update item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">🚀</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>Matching algorithm v2.4 deployed</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>1 day ago • 15% performance improvement</div>", unsafe_allow_html=True)
+        
+        st.markdown("<hr style='margin:16px 0;border:none;border-bottom:1px solid rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        
+        # Second update item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">🔒</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>Privacy protocol updated to v3.1</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>3 days ago • Enhanced encryption standards</div>", unsafe_allow_html=True)
+        
+        st.markdown("<hr style='margin:16px 0;border:none;border-bottom:1px solid rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        
+        # Third update item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">📱</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>Mobile interface improvements</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>1 week ago • Better responsive design</div>", unsafe_allow_html=True)
+    
+    with tabs[2]:
+        # First highlight item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">🏆</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>Group #42 reached 100 successful matches</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>This week • Community milestone</div>", unsafe_allow_html=True)
+        
+        st.markdown("<hr style='margin:16px 0;border:none;border-bottom:1px solid rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        
+        # Second highlight item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">👏</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>New community guide published</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>2 weeks ago • Best practices for matching</div>", unsafe_allow_html=True)
+        
+        st.markdown("<hr style='margin:16px 0;border:none;border-bottom:1px solid rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        
+        # Third highlight item
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.markdown("""
+            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:20px;">🌟</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("<div style='font-weight:500;'>Profile #7890 recognized for privacy advocacy</div>", unsafe_allow_html=True)
+            st.markdown("<div style='color:var(--text-light);font-size:14px;'>Last month • Community contribution</div>", unsafe_allow_html=True)
+    
+    # Call-to-action section at the bottom
+    st.markdown("""
+    <div style="background:linear-gradient(135deg, var(--primary-color), var(--primary-dark));border-radius:16px;padding:32px;margin-top:40px;color:white;text-align:center;">
+        <h2 style="margin-top:0;color:white;margin-bottom:16px;">Ready to get started?</h2>
+        <p style="font-size:18px;max-width:600px;margin:0 auto 24px auto;opacity:0.9;">
+            Create your profile now and experience the power of privacy-preserving matching.
+        </p>
+        <div style="display:inline-block;background:white;color:var(--primary-color);padding:12px 24px;border-radius:8px;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+            Create Profile
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 def profiles_page() -> None:
-    """Profile management page."""
-    st.title("Profile Management")
+    """Profiles page for managing user profiles."""
+    # Load custom CSS
+    load_css()
     
-    tab1, tab2, tab3 = st.tabs(["Create Profile", "Browse Profiles", "My Profile"])
+    # Page header with modern styling
+    st.markdown('<div class="app-header">', unsafe_allow_html=True)
+    st.markdown('<span class="app-logo">👤</span>', unsafe_allow_html=True)
+    st.markdown('<div><h1 style="margin:0">Profiles</h1><p style="margin:0;color:var(--text-light)">Create and manage your personal profiles</p></div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    with tab1:
-        st.header("Create a New Profile")
-        
-        with st.form("profile_form"):
-            # Basic info
-            preferences = st.text_area("Preferences (JSON)", "{}")
-            tags = st.text_input("Tags (comma separated)")
-            status = st.selectbox("Availability", ["active", "busy", "inactive"])
-            
-            # Encryption options
-            use_encryption = st.checkbox("Encrypt sensitive data")
-            
-            if use_encryption and not st.session_state.public_key:
-                st.warning("You need to generate encryption keys first")
-                if st.button("Generate Keys"):
-                    generate_encryption_keys()
-            
-            # Submit button
-            submit = st.form_submit_button("Create Profile")
-            
-            if submit:
-                try:
-                    # Prepare profile data
-                    profile_data = {
-                        "preferences": json.loads(preferences),
-                        "tags": [tag.strip() for tag in tags.split(",") if tag.strip()],
-                        "availability": {"status": status}
-                    }
-                    
-                    # Create profile
-                    response = make_api_request("/profiles/", method="POST", data=profile_data)
-                    
-                    if "error" in response:
-                        st.error(f"Failed to create profile: {response['error']}")
-                    else:
-                        st.success(f"Profile created successfully with ID: {response['profile_id']}")
-                        st.session_state.active_profile_id = response["profile_id"]
-                except Exception as e:
-                    st.error(f"An error occurred: {str(e)}")
+    # Create tabs for different profile actions
+    tabs = st.tabs(["My Profiles", "Create Profile", "Import/Export"])
     
-    with tab2:
-        st.header("Browse Profiles")
+    with tabs[0]:
+        st.markdown("<h3>Your Profiles</h3>", unsafe_allow_html=True)
         
         # Fetch profiles
         profiles_response = make_api_request("/profiles/")
@@ -405,100 +646,291 @@ def profiles_page() -> None:
         if "error" in profiles_response:
             st.error(f"Failed to load profiles: {profiles_response['error']}")
         elif not profiles_response:
-            st.info("No profiles found")
+            st.markdown("""
+            <div style="background-color:#f8f9fa;border-radius:12px;padding:24px;text-align:center;margin:20px 0;">
+                <div style="font-size:48px;margin-bottom:16px;">👤</div>
+                <h3 style="margin-top:0;margin-bottom:8px;">No Profiles Yet</h3>
+                <p style="color:var(--text-light);margin-bottom:20px;">Create your first profile to get started with matching.</p>
+                <div style="display:inline-block;background:linear-gradient(135deg, var(--primary-color), var(--primary-dark));color:white;padding:10px 20px;border-radius:8px;font-weight:500;box-shadow:0 4px 12px rgba(67,97,238,0.2);">
+                    Create Profile
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         else:
-            # Filter options
-            filter_col1, filter_col2 = st.columns(2)
-            with filter_col1:
-                filter_tag = st.text_input("Filter by Tag")
-            with filter_col2:
-                filter_status = st.selectbox("Filter by Status", ["All", "active", "busy", "inactive"])
+            # Display profiles in a grid
+            profile_cols = st.columns(3)
             
-            # Apply filters
-            filtered_profiles = profiles_response
-            if filter_tag:
-                filtered_profiles = [p for p in filtered_profiles if filter_tag.lower() in [t.lower() for t in p.get("tags", [])]]
-            if filter_status != "All":
-                filtered_profiles = [p for p in filtered_profiles if p.get("availability", {}).get("status") == filter_status]
-            
-            # Display profiles
-            for profile in filtered_profiles:
-                with st.container():
-                    display_profile(profile)
-                    st.divider()
-    
-    with tab3:
-        st.header("My Profile")
-        
-        if not st.session_state.active_profile_id:
-            st.info("No active profile selected. Please select a profile from the Browse tab.")
-        else:
-            # Fetch profile details
-            profile_response = make_api_request(f"/profiles/{st.session_state.active_profile_id}")
-            
-            if "error" in profile_response:
-                st.error(f"Failed to load profile: {profile_response['error']}")
-            else:
-                # Display profile
-                display_profile(profile_response)
-                
-                # Edit profile form
-                st.subheader("Edit Profile")
-                
-                with st.form("edit_profile_form"):
-                    # Current values
-                    current_preferences = profile_response.get("preferences", {})
-                    current_tags = profile_response.get("tags", [])
-                    current_status = profile_response.get("availability", {}).get("status", "active")
+            for i, profile in enumerate(profiles_response):
+                with profile_cols[i % 3]:
+                    # Create a profile card with modern styling
+                    st.markdown(f"""
+                    <div class="profile-card">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                            <h3 style="margin:0;font-size:18px;">{profile.get('name', 'Unnamed Profile')}</h3>
+                            <div style="background-color:#f2f6ff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                                <span style="font-size:20px;">👤</span>
+                            </div>
+                        </div>
+                        <p style="color:var(--text-light);margin-bottom:16px;font-size:14px;">ID: {profile.get('id', 'Unknown')}</p>
+                        <p style="margin-bottom:20px;">{profile.get('description', 'No description')}</p>
+                        <div style="display:flex;gap:8px;">
+                            <div class="primary-button">
+                                <button style="width:100%;">Select</button>
+                            </div>
+                            <button style="width:100%;">Edit</button>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
                     
-                    # Form fields
-                    preferences = st.text_area("Preferences (JSON)", json.dumps(current_preferences, indent=2))
-                    tags = st.text_input("Tags (comma separated)", ", ".join(current_tags))
-                    status = st.selectbox("Availability", ["active", "busy", "inactive"], 
-                                         index=["active", "busy", "inactive"].index(current_status))
-                    
-                    # Submit button
-                    submit = st.form_submit_button("Update Profile")
-                    
-                    if submit:
-                        try:
-                            # Prepare profile data
-                            profile_data = {
-                                "preferences": json.loads(preferences),
-                                "tags": [tag.strip() for tag in tags.split(",") if tag.strip()],
-                                "availability": {"status": status}
-                            }
-                            
-                            # Update profile
-                            response = make_api_request(
-                                f"/profiles/{st.session_state.active_profile_id}", 
-                                method="PUT", 
-                                data=profile_data
-                            )
-                            
-                            if "error" in response:
-                                st.error(f"Failed to update profile: {response['error']}")
+                    # Add functional buttons below the card
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        if st.button(f"Select", key=f"select_{profile['id']}"):
+                            st.session_state.active_profile_id = profile['id']
+                            st.success(f"Selected profile: {profile.get('name', 'Unnamed Profile')}")
+                            st.experimental_rerun()
+                    with col2:
+                        if st.button(f"Delete", key=f"delete_{profile['id']}"):
+                            delete_response = make_api_request(f"/profiles/{profile['id']}", method="DELETE")
+                            if "error" in delete_response:
+                                st.error(f"Failed to delete profile: {delete_response['error']}")
                             else:
-                                st.success("Profile updated successfully")
+                                if st.session_state.active_profile_id == profile['id']:
+                                    st.session_state.active_profile_id = None
+                                st.success("Profile deleted successfully!")
                                 st.experimental_rerun()
-                        except Exception as e:
-                            st.error(f"An error occurred: {str(e)}")
+            
+            # Display active profile indicator
+            if st.session_state.active_profile_id:
+                active_profile = next((p for p in profiles_response if p['id'] == st.session_state.active_profile_id), None)
+                if active_profile:
+                    st.markdown(f"""
+                    <div style="background:linear-gradient(135deg, #e6f0ff, #f2f6ff);border-radius:12px;padding:16px;margin-top:24px;border:1px solid rgba(67,97,238,0.1);">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <div style="background-color:var(--primary-color);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:white;">
+                                <span style="font-size:16px;">✓</span>
+                            </div>
+                            <div>
+                                <p style="margin:0;font-weight:500;">Active Profile: {active_profile.get('name', 'Unnamed Profile')}</p>
+                                <p style="margin:0;color:var(--text-light);font-size:14px;">ID: {active_profile.get('id', 'Unknown')}</p>
+                            </div>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+    
+    with tabs[1]:
+        st.markdown("<h3>Create New Profile</h3>", unsafe_allow_html=True)
+        
+        # Create a form with modern styling
+        with st.form("create_profile_form"):
+            st.markdown("""
+            <div style="margin-bottom:20px;">
+                <p style="color:var(--text-light);">Fill out the form below to create a new profile. Your profile will be used for matching with other users and groups.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            name = st.text_input("Profile Name", placeholder="Enter a name for your profile")
+            description = st.text_area("Description", placeholder="Describe yourself or the purpose of this profile")
+            
+            # Preferences section with collapsible UI
+            with st.expander("Preferences (Optional)", expanded=False):
+                st.markdown("""
+                <div style="margin-bottom:16px;">
+                    <p style="color:var(--text-light);font-size:14px;">
+                        Preferences help the matching engine find better matches for you. 
+                        All preference data is encrypted and protected.
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
                 
-                # Danger zone
-                st.subheader("Danger Zone")
-                if st.button("Delete Profile", type="primary", help="This action cannot be undone"):
-                    if st.checkbox("I understand this action cannot be undone"):
-                        response = make_api_request(
-                            f"/profiles/{st.session_state.active_profile_id}",
-                            method="DELETE"
-                        )
+                interests = st.multiselect(
+                    "Interests",
+                    options=["Technology", "Science", "Art", "Music", "Sports", "Travel", "Food", "Literature", "Movies", "Gaming"],
+                    default=[]
+                )
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    age = st.slider("Age", min_value=18, max_value=100, value=25)
+                with col2:
+                    location = st.text_input("Location", placeholder="City, Country")
+                
+                experience_level = st.select_slider(
+                    "Experience Level",
+                    options=["Beginner", "Intermediate", "Advanced", "Expert"]
+                )
+                
+                availability = st.multiselect(
+                    "Availability",
+                    options=["Weekdays", "Weekends", "Mornings", "Afternoons", "Evenings"],
+                    default=[]
+                )
+            
+            # Privacy settings
+            with st.expander("Privacy Settings", expanded=False):
+                st.markdown("""
+                <div style="margin-bottom:16px;">
+                    <p style="color:var(--text-light);font-size:14px;">
+                        Control how your profile data is shared and used in the matching process.
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                share_contact_info = st.checkbox("Share contact information with matches", value=False)
+                visible_to_groups = st.checkbox("Visible to groups", value=True)
+                visible_to_individuals = st.checkbox("Visible to individuals", value=True)
+                
+                anonymity_level = st.select_slider(
+                    "Anonymity Level",
+                    options=["Low", "Medium", "High", "Maximum"],
+                    value="Medium"
+                )
+            
+            # Submit button with modern styling
+            st.markdown('<div class="primary-button">', unsafe_allow_html=True)
+            submit_button = st.form_submit_button("Create Profile")
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            if submit_button:
+                if not name:
+                    st.error("Profile name is required")
+                else:
+                    # Prepare preferences
+                    preferences = {
+                        "interests": interests,
+                        "age": age,
+                        "location": location,
+                        "experience_level": experience_level,
+                        "availability": availability,
+                        "privacy": {
+                            "share_contact_info": share_contact_info,
+                            "visible_to_groups": visible_to_groups,
+                            "visible_to_individuals": visible_to_individuals,
+                            "anonymity_level": anonymity_level
+                        }
+                    }
+                    
+                    # Create profile
+                    profile_data = {
+                        "name": name,
+                        "description": description,
+                        "preferences": preferences
+                    }
+                    
+                    response = make_api_request("/profiles/", method="POST", data=profile_data)
+                    
+                    if "error" in response:
+                        st.error(f"Failed to create profile: {response['error']}")
+                    else:
+                        st.success("Profile created successfully!")
+                        # Set as active profile
+                        st.session_state.active_profile_id = response["id"]
+                        st.experimental_rerun()
+    
+    with tabs[2]:
+        st.markdown("<h3>Import/Export Profiles</h3>", unsafe_allow_html=True)
+        
+        # Create columns for import and export
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("""
+            <div class="feature-card">
+                <h4>📤 Export Profile</h4>
+                <p>Export your profile data as a JSON file for backup or transfer to another system.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Profile selection for export
+            profiles_response = make_api_request("/profiles/")
+            if "error" not in profiles_response and profiles_response:
+                profile_options = {p["id"]: p["name"] for p in profiles_response}
+                selected_profile_id = st.selectbox(
+                    "Select profile to export",
+                    options=list(profile_options.keys()),
+                    format_func=lambda x: profile_options.get(x, "Unknown")
+                )
+                
+                if st.button("Export Profile", key="export_profile"):
+                    profile_data = make_api_request(f"/profiles/{selected_profile_id}")
+                    if "error" in profile_data:
+                        st.error(f"Failed to export profile: {profile_data['error']}")
+                    else:
+                        # Convert to JSON and create download link
+                        profile_json = json.dumps(profile_data, indent=2)
+                        b64 = base64.b64encode(profile_json.encode()).decode()
+                        filename = f"profile_{selected_profile_id}_{datetime.now().strftime('%Y%m%d')}.json"
+                        href = f'<a href="data:application/json;base64,{b64}" download="{filename}" class="download-button">Download Profile JSON</a>'
+                        st.markdown(f"""
+                        <div style="margin-top:16px;text-align:center;">
+                            {href}
+                        </div>
+                        <style>
+                            .download-button {{
+                                display: inline-block;
+                                background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 8px;
+                                text-decoration: none;
+                                font-weight: 500;
+                                box-shadow: 0 4px 12px rgba(67,97,238,0.2);
+                                transition: all 0.2s ease;
+                            }}
+                            .download-button:hover {{
+                                transform: translateY(-2px);
+                                box-shadow: 0 6px 16px rgba(67,97,238,0.3);
+                            }}
+                        </style>
+                        """, unsafe_allow_html=True)
+            else:
+                st.info("No profiles available for export")
+        
+        with col2:
+            st.markdown("""
+            <div class="feature-card">
+                <h4>📥 Import Profile</h4>
+                <p>Import a profile from a JSON file to restore from backup or transfer from another system.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # File uploader for import
+            uploaded_file = st.file_uploader("Upload profile JSON file", type=["json"])
+            
+            if uploaded_file is not None:
+                try:
+                    profile_data = json.load(uploaded_file)
+                    # Remove ID to create a new profile
+                    if "id" in profile_data:
+                        del profile_data["id"]
+                    
+                    # Add "Imported" to the name
+                    if "name" in profile_data:
+                        profile_data["name"] = f"{profile_data['name']} (Imported)"
+                    
+                    if st.button("Import Profile", key="import_profile"):
+                        response = make_api_request("/profiles/", method="POST", data=profile_data)
                         
                         if "error" in response:
-                            st.error(f"Failed to delete profile: {response['error']}")
+                            st.error(f"Failed to import profile: {response['error']}")
                         else:
-                            st.success("Profile deleted successfully")
-                            st.session_state.active_profile_id = None
+                            st.success("Profile imported successfully!")
                             st.experimental_rerun()
+                except Exception as e:
+                    st.error(f"Error parsing profile data: {str(e)}")
+                    
+    # Help section at the bottom
+    st.markdown("""
+    <div style="background-color:#f8f9fa;border-radius:12px;padding:20px;margin-top:40px;border:1px solid rgba(0,0,0,0.05);">
+        <h4 style="margin-top:0;">💡 Profile Tips</h4>
+        <ul style="margin-bottom:0;">
+            <li>Create multiple profiles for different purposes or contexts</li>
+            <li>Add detailed preferences to improve your matching results</li>
+            <li>Export your profiles regularly for backup</li>
+            <li>Use the privacy settings to control how your data is shared</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
 def groups_page() -> None:
     """Group management page."""
@@ -1054,7 +1486,7 @@ def main():
         
         # Navigation
         st.subheader("Navigation")
-        selection = st.radio("", PAGES, label_visibility="collapsed")
+        selection = st.radio("Select Page", PAGES, label_visibility="collapsed")
         
         st.markdown("---")
         
