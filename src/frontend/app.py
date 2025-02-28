@@ -29,7 +29,7 @@ PAGES = ["Home", "Profiles", "Groups", "Matching", "Privacy Tools"]
 
 # Set page configuration and theme
 st.set_page_config(
-    page_title="UNIVERSA",
+    page_title="Universa - UniPriv",
     page_icon="🌐",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -374,13 +374,13 @@ def home_page() -> None:
     # Title with logo and header
     st.markdown('<div class="app-header">', unsafe_allow_html=True)
     st.markdown('<span class="app-logo">🌐</span>', unsafe_allow_html=True)
-    st.markdown('<div><h1 style="margin:0">UNIVERSA</h1><p style="margin:0;color:var(--text-light)">Advanced Decentralized Matching Engine</p></div>', unsafe_allow_html=True)
+    st.markdown('<div><h1 style="margin:0">Universa - UniPriv</h1><p style="margin:0;color:var(--text-light)">Advanced Decentralized Matching Engine</p></div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
     # Welcome section with a modern hero area
     st.markdown("""
     <div style="background:linear-gradient(135deg, #f2f6ff, #e6f0ff);border-radius:16px;padding:32px;margin-bottom:32px;border:1px solid rgba(67,97,238,0.1);">
-        <h2 style="margin-top:0;margin-bottom:16px;color:var(--primary-dark);">Welcome to UNIVERSA</h2>
+        <h2 style="margin-top:0;margin-bottom:16px;color:var(--primary-dark);">Welcome to Universa - UniPriv</h2>
         <p style="font-size:18px;line-height:1.6;max-width:800px;margin-bottom:24px;">
             This privacy-focused system helps connect individuals and groups based on shared interests and preferences 
             while maintaining data security and anonymity.
@@ -1481,7 +1481,7 @@ def main():
     # Sidebar navigation with improved styling
     with st.sidebar:
         # App title
-        st.title("UNIVERSA")
+        st.title("Universa - UniPriv")
         st.caption("Decentralized Matching Engine")
         
         if USE_MOCK_API:
@@ -1523,7 +1523,7 @@ def main():
             st.experimental_rerun()
         
         # Add footer
-        st.markdown("""<div style="position: fixed; bottom: 0; width: 100%; text-align: center; padding: 1rem; opacity: 0.7; font-size: 0.8rem;">UNIVERSA © 2023</div>""", unsafe_allow_html=True)
+        st.markdown("""<div style="position: fixed; bottom: 0; width: 100%; text-align: center; padding: 1rem; opacity: 0.7; font-size: 0.8rem;">Universa - UniPriv © 2023</div>""", unsafe_allow_html=True)
     
     # Display the selected page
     if selection == "Home":

@@ -1,76 +1,76 @@
-# UNIVERSA Streamlit App Deployment Guide
+# Universa - UniPriv Decentralized Matching Engine
 
-This guide explains how to deploy the UNIVERSA Decentralized Matching Engine on Streamlit Cloud using GitHub.
+## 🌐 What is Universa - UniPriv?
 
-## Prerequisites
+Universa - UniPriv is a privacy-focused matching system that connects people and groups while protecting personal data. It helps you find connections based on shared interests and preferences without exposing sensitive information.
 
-- A GitHub account
-- Your UNIVERSA codebase pushed to a GitHub repository
+**[Try it now →](https://universa-decentralized-matching.streamlit.app/)**
 
-## Deployment Steps
+## 🚀 How to Use Universa - UniPriv
 
-### 1. Push Your Code to GitHub
+### Quick Start
 
-Make sure your repository has the following structure:
-```
-repository-root/
-├── streamlit_app.py       # Main entry point for Streamlit Cloud
-├── requirements.txt       # All required dependencies
-├── README.md              # Project documentation
-└── src/                   # Source code folder
-    └── frontend/
-        └── app.py         # Your main Streamlit application logic
-```
+1. Visit the [live demo](https://universa-decentralized-matching.streamlit.app/)
+2. Use the sidebar to navigate between features:
+   - **Home**: See the dashboard and overview
+   - **Profiles**: Create your personal profile
+   - **Groups**: Join or create groups
+   - **Matching**: Find compatible connections
+   - **Privacy Tools**: Protect your information
 
-### 2. Deploy to Streamlit Cloud
+### Creating a Profile
 
-1. Go to [Streamlit Cloud](https://streamlit.io/cloud)
-2. Sign in with your GitHub account
-3. Click "New app"
-4. Select your repository, branch, and set the main file path to `streamlit_app.py`
-5. (Optional) Add any secrets or environment variables:
-   - `API_URL`: Your backend API URL (if not using the default)
+1. Click on the **Profiles** tab in the sidebar
+2. Fill in your name and description
+3. Add your preferences and interests
+4. Set your privacy settings
+5. Click "Create Profile"
 
-### 3. Advanced Configuration
+### Finding Matches
 
-#### Environment Variables
+1. Select the **Matching** tab
+2. Choose your matching algorithm (tag or preference-based)
+3. Set your minimum match score
+4. Click "Find Matches"
+5. Browse and connect with your matches
 
-If you need to set environment variables, you can add them in the Streamlit Cloud dashboard:
-1. Go to your app settings
-2. Add the secrets in TOML format, for example:
-   ```toml
-   [env]
-   API_URL = "https://your-api-url.com"
-   ```
+### Using Groups
 
-#### Custom Domain
+1. Go to the **Groups** tab
+2. Browse existing groups or create your own
+3. Join groups that match your interests
+4. See group recommendations based on your profile
 
-If you want to use a custom domain:
-1. Go to your app settings in Streamlit Cloud
-2. Navigate to the "Custom domain" section
-3. Follow the instructions to set up DNS records for your domain
+### Privacy Features
 
-## Troubleshooting
+- **PII Detection**: Identify personal information in text
+- **Anonymization**: Protect sensitive data
+- **Encryption**: Generate keys for secure communication
 
-If your app doesn't deploy correctly:
-
-1. Check the app logs in the Streamlit Cloud dashboard
-2. Ensure all dependencies are correctly listed in `requirements.txt`
-3. Verify that `streamlit_app.py` is correctly importing from `src.frontend.app`
-4. Make sure the API endpoint is accessible from Streamlit Cloud
-
-## Local Development
-
-To run the app locally before deploying:
+## 💻 Local Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/Sarthak-006/universa-streamlit.git
+cd universa-streamlit
+
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the app
-streamlit run streamlit_app.py
+# Run the application
+python run_demo.py
 ```
 
-## Updating Your Deployment
+## 📝 About the Project
 
-When you push changes to your GitHub repository, Streamlit Cloud will automatically rebuild and redeploy your app. 
+Universa - UniPriv was developed as a solution for Challenge 3: Advanced Decentralized Matching Engine. It features:
+
+- Privacy-preserving matching protocols
+- Support for individual, group, and business connections
+- Versatile matching for various use cases (P2P, B2C, B2B)
+
+## 🔗 Links
+
+- [Live Demo](https://universa-decentralized-matching.streamlit.app/)
+- [GitHub Repository](https://github.com/Sarthak-006/universa-streamlit)
+- [Report Issues](https://github.com/Sarthak-006/universa-streamlit/issues) 
