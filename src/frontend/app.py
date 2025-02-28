@@ -246,14 +246,16 @@ def load_css():
     """, unsafe_allow_html=True)
 
 # Initialize session state
-if "private_key" not in st.session_state:
-    st.session_state.private_key = ""
-if "public_key" not in st.session_state:
-    st.session_state.public_key = ""
-if "active_profile_id" not in st.session_state:
-    st.session_state.active_profile_id = None
-if "active_group_id" not in st.session_state:
-    st.session_state.active_group_id = None
+def initialize_session_state():
+    if "private_key" not in st.session_state:
+        st.session_state.private_key = ""
+    if "public_key" not in st.session_state:
+        st.session_state.public_key = ""
+    if "active_profile_id" not in st.session_state:
+        st.session_state.active_profile_id = None
+    if "active_group_id" not in st.session_state:
+        st.session_state.active_group_id = None
+    # Add any other session state variables that need initialization
 
 # Check if the API is accessible
 def check_api_connection():
@@ -1462,6 +1464,9 @@ def privacy_tools_page() -> None:
 # Main app logic
 def main():
     """Main application entry point."""
+    # Initialize session state at the beginning of main
+    initialize_session_state()
+    
     # Load custom CSS
     load_css()
     
