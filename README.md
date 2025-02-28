@@ -73,4 +73,4 @@ Universa - UniPriv was developed as a solution for Challenge 3: Advanced Decentr
 
 - [Live Demo](https://universa-decentralized-matching.streamlit.app/)
 - [GitHub Repository](https://github.com/Sarthak-006/universa-streamlit)
-- [Report Issues](https://github.com/Sarthak-006/universa-streamlit/issues) 
+- [Report Issues](https://github.com/Sarthak-006/universa-streamlit/issues)
